@@ -72,9 +72,14 @@ try {
     $env:SPECKIT_CORE_DIR = $null
     Push-Location $project
     $gateOutput = pwsh -NoProfile -File "$installed/scripts/powershell/quality/validate-artifacts.ps1" 2>&1
+    $gateExit = $LASTEXITCODE
     Pop-Location
     Assert-True ("$gateOutput" -notmatch "Spec Kit core not found") (
         "installed gate finds the project core"
+    )
+    Assert-True ($gateExit -ne 0) "installed gate blocks without an active feature"
+    Assert-True ("$gateOutput" -match "Feature directory not found") (
+        "installed gate fails for the business reason, not another error"
     )
 
     # Review Focus 4: updating with --force keeps the project's config.
