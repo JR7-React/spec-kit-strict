@@ -18,3 +18,6 @@ try {
 finally {
     Remove-Item -LiteralPath $coreProject -Recurse -Force -ErrorAction SilentlyContinue
 }
+# Tests run git commands that fail on purpose; CI shells exit with the last
+# native exit code, so a green suite must say so explicitly.
+exit 0
