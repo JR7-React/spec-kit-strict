@@ -1,0 +1,7 @@
+.git/
+.superpowers/
+tests/
+docs/
+.github/
+.gitattributes
+.gitignore
