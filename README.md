@@ -43,14 +43,14 @@ Al instalar desde una URL, Spec Kit pide confirmar que confías en la fuente (`y
 se puede responder con `printf 'y\n' | specify extension add ...`.
 
 ```bash
-GH_TOKEN=$(gh auth token) specify extension add strict --from https://github.com/JR7-React/spec-kit-strict/archive/refs/tags/v1.0.0.zip
+GH_TOKEN=$(gh auth token) specify extension add strict --from https://github.com/JR7-React/spec-kit-strict/archive/refs/tags/v1.0.1.zip
 ```
 
 En PowerShell:
 
 ```powershell
 $env:GH_TOKEN = gh auth token
-specify extension add strict --from https://github.com/JR7-React/spec-kit-strict/archive/refs/tags/v1.0.0.zip
+specify extension add strict --from https://github.com/JR7-React/spec-kit-strict/archive/refs/tags/v1.0.1.zip
 ```
 
 Spec Kit registra los 22 hooks en `.specify/extensions.yml`, genera los skills
@@ -158,7 +158,8 @@ pwsh -NoProfile -File tests/powershell/run-tests.ps1 -Filter install
 ## Créditos
 
 `scripts/powershell/git/create-new-feature-branch.ps1` y `scripts/powershell/git/git-common.ps1`
-vienen de [github/spec-kit](https://github.com/github/spec-kit) v1.1.1 (licencia MIT).
+vienen de [github/spec-kit](https://github.com/github/spec-kit) v1.1.1 (licencia MIT); su aviso
+de copyright y permiso está en `THIRD_PARTY_NOTICES.md`.
 
 ## Licencia
 

@@ -1,7 +1,8 @@
 #!/usr/bin/env pwsh
-# Vendored from github/spec-kit v1.1.1 (MIT), extensions/git/scripts/powershell/git-common.ps1.
-# Kept inside the strict-hooks layer so speckit.git.branch does not depend on
-# installing the bundled 'git' extension (its id and speckit.git.commit collide).
+# Vendored from github/spec-kit v1.1.1, extensions/git/scripts/powershell/git-common.ps1.
+# Copyright GitHub, Inc. MIT License: see THIRD_PARTY_NOTICES.md.
+# Kept inside this extension so speckit.strict.branch does not depend on the
+# bundled 'git' extension (its id and speckit.git.commit collide).
 # Git-specific common functions for the git extension.
 # Extracted from scripts/powershell/common.ps1 -- contains only git-specific
 # branch validation and detection logic.

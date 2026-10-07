@@ -34,3 +34,21 @@ foreach ($required in @(
         "record analyze prompt requires $required"
     )
 }
+
+# Vendored github/spec-kit scripts must keep their MIT copyright and permission
+# notice when the extension is redistributed.
+$notices = Join-Path $root "THIRD_PARTY_NOTICES.md"
+Assert-True (Test-Path -LiteralPath $notices) "THIRD_PARTY_NOTICES.md exists"
+$noticeText = Get-Content -LiteralPath $notices -Raw
+foreach ($required in @(
+    "Copyright GitHub, Inc.",
+    "Permission is hereby granted, free of charge",
+    "scripts/powershell/git/create-new-feature-branch.ps1",
+    "scripts/powershell/git/git-common.ps1"
+)) {
+    Assert-True ($noticeText -match [regex]::Escape($required)) "notices include $required"
+}
+foreach ($vendored in @("create-new-feature-branch.ps1", "git-common.ps1")) {
+    $header = (Get-Content (Join-Path $root "scripts/powershell/git/$vendored") -TotalCount 6) -join "`n"
+    Assert-True ($header -match "THIRD_PARTY_NOTICES\.md") "$vendored points to the license notice"
+}
