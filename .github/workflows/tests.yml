@@ -31,3 +31,26 @@ jobs:
       - name: Run extension tests
         shell: pwsh
         run: ./tests/powershell/run-tests.ps1
+
+  # Early warning, not a gate: runs the suite against the newest Spec Kit so a
+  # change in its core scripts (Get-RepoRoot, Get-FeaturePathsEnv, init flags)
+  # shows up before a project upgrades. The manifest accepts ">=1.1.0".
+  latest-speckit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    continue-on-error: true
+    steps:
+      - uses: actions/checkout@v6
+      - uses: astral-sh/setup-uv@v6
+      - name: Install latest Spec Kit CLI
+        run: uv tool install specify-cli
+      - name: Show Spec Kit version
+        run: specify --version
+      - name: Configure git identity
+        run: |
+          git config --global user.name "strict-ci"
+          git config --global user.email "strict-ci@example.org"
+          git config --global init.defaultBranch main
+      - name: Run extension tests
+        shell: pwsh
+        run: ./tests/powershell/run-tests.ps1
