@@ -10,6 +10,7 @@
 - `install-checksums.json` en cada release y `tools/write-install-checksums.ps1` para
   regenerarlo; la suite falla si queda desactualizado.
 - Job de CI no bloqueante contra el `specify-cli` más reciente.
+- El repositorio es público: la instalación ya no requiere `~/.specify/auth.json` ni token.
 
 ### Changed
 

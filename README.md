@@ -25,36 +25,13 @@ del ciclo SDD en gates obligatorios.
 
 ## Instalación
 
-El repo es privado. Spec Kit 1.1 solo envía credenciales a los hosts declarados en
-`~/.specify/auth.json`; créalo una vez por máquina (no guarda ningún secreto, lee el token de
-`GH_TOKEN`):
-
-```json
-{
-  "providers": [
-    {
-      "provider": "github",
-      "hosts": ["github.com", "api.github.com", "codeload.github.com"],
-      "auth": "bearer",
-      "token_env": "GH_TOKEN"
-    }
-  ]
-}
+```bash
+specify extension add strict --from https://github.com/JR7-React/spec-kit-strict/archive/refs/tags/v1.1.0.zip
 ```
 
 Al instalar desde una URL, Spec Kit pide confirmar que confías en la fuente (`y`). En un script
-se puede responder con `printf 'y\n' | specify extension add ...`.
-
-```bash
-GH_TOKEN=$(gh auth token) specify extension add strict --from https://github.com/JR7-React/spec-kit-strict/archive/refs/tags/v1.1.0.zip
-```
-
-En PowerShell:
-
-```powershell
-$env:GH_TOKEN = gh auth token
-specify extension add strict --from https://github.com/JR7-React/spec-kit-strict/archive/refs/tags/v1.1.0.zip
-```
+o en CI se puede responder con `printf 'y
+' | specify extension add ...`.
 
 Spec Kit registra los 22 hooks en `.specify/extensions.yml`, genera los skills
 `/speckit-strict-*` para cada agente instalado y crea
@@ -82,7 +59,7 @@ Spec Kit conserva este archivo al actualizar la extensión.
 Repite la instalación con el zip del tag nuevo y `--force`:
 
 ```bash
-GH_TOKEN=$(gh auth token) specify extension add strict --force --from https://github.com/JR7-React/spec-kit-strict/archive/refs/tags/<tag>.zip
+specify extension add strict --force --from https://github.com/JR7-React/spec-kit-strict/archive/refs/tags/<tag>.zip
 ```
 
 ## Comandos

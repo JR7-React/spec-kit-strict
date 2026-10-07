@@ -2,7 +2,7 @@
 
 - **Fecha:** 2026-10-06
 - **Estado:** aprobado en conversación; pendiente de revisión de este documento
-- **Repo:** `JR7-React/spec-kit-strict` (privado)
+- **Repo:** `JR7-React/spec-kit-strict` (público desde v1.1.0)
 - **Spec Kit objetivo:** 1.1.1 (`requires.speckit_version: ">=1.1.0"`)
 
 ## 1. Contexto
@@ -38,7 +38,7 @@ repo, para instalarla en cualquier proyecto con un comando y mantener una sola f
 
 | Tema | Decisión |
 |---|---|
-| Distribución | Repo propio privado con tags; instalación con `--from <zip>`. Spec Kit 1.1 solo envía credenciales según `~/.specify/auth.json` (proveedor `github`, `token_env: GH_TOKEN`), y pide confirmar la URL (`y`) |
+| Distribución | Repo propio público (desde v1.1.0; privado hasta v1.0.1) con tags; instalación con `--from <zip>` sin credenciales. Spec Kit pide confirmar la URL (`y`) |
 | Alcance | Repo de la extensión v1.0.0 + adopción en la plantilla |
 | Nombres | id `strict`; comandos `speckit.strict.*`, sin alias |
 | Número de extensiones | Una sola (el orden de hooks solo se garantiza dentro de una extensión) |
