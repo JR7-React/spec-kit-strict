@@ -62,7 +62,7 @@ spec-kit-strict/
 ├── commands/                    # 14 comandos speckit.strict.*
 ├── prompts/record-analyze.md
 ├── scripts/powershell/
-│   ├── core-common.ps1          # localiza y carga el common.ps1 core del proyecto
+│   ├── import-speckit-core.ps1          # localiza y carga el common.ps1 core del proyecto
 │   ├── quality/                 # scripts actuales de quality
 │   └── git/                     # scripts actuales de git + script de ramas incluido (MIT)
 ├── config-template.yml          # plantilla de strict-config.yml
@@ -154,7 +154,7 @@ que el orden del YAML y el orden por `priority` coincidan.
 
 La lógica de validación no cambia. Solo cambia la resolución de rutas:
 
-- **`core-common.ps1` (nuevo):** sube desde `$PSScriptRoot` hasta encontrar
+- **`import-speckit-core.ps1` (nuevo):** sube desde `$PSScriptRoot` hasta encontrar
   `.specify/scripts/powershell/common.ps1` y lo carga. Si no lo encuentra, usa
   `$env:SPECKIT_CORE_DIR` (solo para desarrollo y tests de la extensión); si tampoco existe,
   falla con un error claro. Lo usan `quality/quality-common.ps1` y
