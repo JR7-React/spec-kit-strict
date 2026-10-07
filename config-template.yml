@@ -1,0 +1,77 @@
+{
+  "schema_version": 1,
+  "base_branch": "main",
+  "line_limits": {
+    "new": 100,
+    "modified": 199
+  },
+  "source_extensions": [
+    ".py", ".ts", ".tsx", ".js", ".jsx", ".ps1"
+  ],
+  "scope_exemptions": [
+    "^specs/",
+    "^\\.specify/",
+    "^(CLAUDE|GEMINI)\\.md$",
+    "^frontend/",
+    "^backend/",
+    "^AGENTS\\.md$"
+  ],
+  "line_exempt_patterns": [
+    "\\.test\\.[jt]sx?$",
+    "\\.spec\\.[jt]sx?$",
+    "\\.Tests\\.ps1$",
+    "(^|/)tests?/.*\\.py$",
+    "(^|/)(conftest|test_[^/]+|factories)\\.py$",
+    "(^|/)migrations/.*\\.py$"
+  ],
+  "frontend": {
+    "root": "frontend",
+    "commands": {
+      "lint": ["pnpm", "run", "lint"],
+      "typecheck": ["pnpm", "run", "typecheck"],
+      "build": ["pnpm", "run", "build"]
+    },
+    "test_rules": [
+      {
+        "pattern": "^frontend/src/features/([^/]+)/",
+        "target": "src/features/$1"
+      },
+      {
+        "pattern": "^frontend/src/app/",
+        "target": "src/app"
+      },
+      {
+        "pattern": "^frontend/src/shared/",
+        "target": "src/shared"
+      }
+    ],
+    "non_test_paths": [
+      "^frontend/(package.json|pnpm-lock.yaml|pnpm-workspace.yaml)$",
+      "^frontend/(eslint|vite|vitest)\\.config\\.(js|ts)$",
+      "^frontend/tsconfig[^/]*\\.json$"
+    ]
+  },
+  "backend": {
+    "root": "backend",
+    "compose_file": "backend/docker-compose.yml",
+    "test_rules": [
+      {
+        "pattern": "^backend/apps/([^/]+)/",
+        "target": "apps/$1/tests"
+      },
+      {
+        "pattern": "^backend/config/",
+        "target": "config/tests"
+      }
+    ],
+    "migration_patterns": [
+      "^backend/apps/[^/]+/models\\.py$",
+      "^backend/apps/[^/]+/models/",
+      "^backend/apps/[^/]+/migrations/"
+    ],
+    "non_test_paths": [
+      "^backend/manage\\.py$",
+      "^backend/scripts/run_backend_checks\\.py$"
+    ]
+  }
+}
