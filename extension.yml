@@ -1,0 +1,185 @@
+schema_version: "1.0"
+
+extension:
+  id: "strict"
+  name: "Strict SDD Gates"
+  version: "1.0.0"
+  description: "Gates estrictos de artefactos, readiness e implementacion, ramas por feature y commits acotados de artefactos SpecKit"
+  category: "process"
+  effect: "read-write"
+  author: "JR7-React"
+  repository: "https://github.com/JR7-React/spec-kit-strict"
+  license: "MIT"
+  homepage: "https://github.com/JR7-React/spec-kit-strict"
+
+requires:
+  speckit_version: ">=1.1.0"
+  tools:
+    - name: "pwsh"
+      version: ">=7.0.0"
+      required: true
+    - name: "git"
+      required: true
+
+provides:
+  commands:
+    - name: "speckit.strict.branch"
+      file: "commands/branch.md"
+      description: "Crea o reutiliza la rama de la feature antes de especificar"
+    - name: "speckit.strict.commit"
+      file: "commands/commit.md"
+      description: "Commitea solo los artefactos SpecKit de la fase actual"
+    - name: "speckit.strict.finalize-tasks"
+      file: "commands/finalize-tasks.md"
+      description: "Commitea tasks.md tras un receipt de implementacion vigente"
+    - name: "speckit.strict.artifacts"
+      file: "commands/artifacts.md"
+      description: "Valida spec, plan, tasks y checklists de la feature activa"
+    - name: "speckit.strict.readiness"
+      file: "commands/readiness.md"
+      description: "Exige artefactos, checklists y analysis receipt vigentes antes de implementar"
+    - name: "speckit.strict.implementation-gate"
+      file: "commands/implementation-gate.md"
+      description: "Ejecuta los gates locales selectivos tras implementar"
+    - name: "speckit.strict.before-clarify"
+      file: "commands/before-clarify.md"
+      description: "Valida rama y estructura minima de la specification"
+    - name: "speckit.strict.before-plan"
+      file: "commands/before-plan.md"
+      description: "Exige specification y checklist base completos"
+    - name: "speckit.strict.before-tasks"
+      file: "commands/before-tasks.md"
+      description: "Exige plan y artefactos tecnicos validos"
+    - name: "speckit.strict.before-checklist"
+      file: "commands/before-checklist.md"
+      description: "Valida la specification antes del checklist"
+    - name: "speckit.strict.before-analyze"
+      file: "commands/before-analyze.md"
+      description: "Exige artefactos y checklists completos antes de analizar"
+    - name: "speckit.strict.after-analyze"
+      file: "commands/after-analyze.md"
+      description: "Registra el reporte de analyze y bloquea CRITICAL o HIGH"
+    - name: "speckit.strict.before-taskstoissues"
+      file: "commands/before-taskstoissues.md"
+      description: "Exige analysis vigente y remoto GitHub valido"
+    - name: "speckit.strict.after-taskstoissues"
+      file: "commands/after-taskstoissues.md"
+      description: "Verifica una issue unica por cada T###"
+
+  config:
+    - name: "strict-config.yml"
+      template: "config-template.yml"
+      description: "Raices de frontend y backend, reglas de tests y limites de lineas del proyecto"
+      required: true
+
+hooks:
+  before_specify:
+    - command: "speckit.strict.branch"
+      optional: false
+      priority: 10
+      description: "Crea o reutiliza la rama de feature"
+  after_specify:
+    - command: "speckit.strict.artifacts"
+      optional: false
+      priority: 10
+      description: "Valida spec y checklist base"
+    - command: "speckit.strict.commit"
+      optional: false
+      priority: 20
+      description: "Commitea solo artefactos de specification"
+  before_clarify:
+    - command: "speckit.strict.before-clarify"
+      optional: false
+      priority: 10
+      description: "Valida rama y estructura minima de la specification"
+  after_clarify:
+    - command: "speckit.strict.artifacts"
+      optional: false
+      priority: 10
+      description: "Revalida la specification aclarada"
+    - command: "speckit.strict.commit"
+      optional: false
+      priority: 20
+      description: "Commitea aclaraciones y checklist"
+  before_plan:
+    - command: "speckit.strict.before-plan"
+      optional: false
+      priority: 10
+      description: "Exige specification y checklist base completos"
+  after_plan:
+    - command: "speckit.strict.artifacts"
+      optional: false
+      priority: 10
+      description: "Valida plan y artefactos tecnicos"
+    - command: "speckit.strict.commit"
+      optional: false
+      priority: 20
+      description: "Commitea solo artefactos de plan"
+  before_tasks:
+    - command: "speckit.strict.before-tasks"
+      optional: false
+      priority: 10
+      description: "Exige plan y artefactos tecnicos validos"
+  after_tasks:
+    - command: "speckit.strict.artifacts"
+      optional: false
+      priority: 10
+      description: "Valida tasks y trazabilidad"
+    - command: "speckit.strict.commit"
+      optional: false
+      priority: 20
+      description: "Commitea tasks.md"
+  before_checklist:
+    - command: "speckit.strict.before-checklist"
+      optional: false
+      priority: 10
+      description: "Valida la specification antes del checklist"
+  after_checklist:
+    - command: "speckit.strict.artifacts"
+      optional: false
+      priority: 10
+      description: "Valida estructura y trazabilidad del checklist"
+    - command: "speckit.strict.commit"
+      optional: false
+      priority: 20
+      description: "Commitea solo checklists"
+  before_analyze:
+    - command: "speckit.strict.before-analyze"
+      optional: false
+      priority: 10
+      description: "Exige artefactos y checklists completos"
+  after_analyze:
+    - command: "speckit.strict.after-analyze"
+      optional: false
+      priority: 10
+      description: "Registra el reporte y bloquea CRITICAL o HIGH"
+  before_taskstoissues:
+    - command: "speckit.strict.before-taskstoissues"
+      optional: false
+      priority: 10
+      description: "Exige analysis vigente y remoto GitHub valido"
+  after_taskstoissues:
+    - command: "speckit.strict.after-taskstoissues"
+      optional: false
+      priority: 10
+      description: "Verifica una issue unica por cada T###"
+  before_implement:
+    - command: "speckit.strict.readiness"
+      optional: false
+      priority: 10
+      description: "Exige artefactos, checklists y analysis receipt vigentes"
+  after_implement:
+    - command: "speckit.strict.implementation-gate"
+      optional: false
+      priority: 10
+      description: "Ejecuta gates locales selectivos"
+    - command: "speckit.strict.finalize-tasks"
+      optional: false
+      priority: 20
+      description: "Commitea solo tasks.md tras receipt vigente"
+
+tags:
+  - "quality-gates"
+  - "git"
+  - "process"
+  - "sdd"
