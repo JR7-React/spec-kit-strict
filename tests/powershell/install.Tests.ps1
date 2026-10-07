@@ -82,6 +82,45 @@ try {
         "installed gate fails for the business reason, not another error"
     )
 
+    # verify-installation: green for an intact project, blocked when hooks or
+    # installed files drift.
+    $workflowDir = Join-Path $project ".github/workflows"
+    New-Item -ItemType Directory -Path $workflowDir -Force | Out-Null
+    @(
+        "steps:",
+        "  - run: pwsh .specify/extensions/strict/scripts/powershell/quality/invoke-frontend-gate.ps1 -SkipTests",
+        "  - run: pwsh .specify/extensions/strict/scripts/powershell/quality/invoke-backend-gate.ps1 -SkipTests"
+    ) | Set-Content (Join-Path $workflowDir "quality.yml")
+    $verify = "$installed/scripts/powershell/verify-installation.ps1"
+    function Invoke-Verify {
+        Push-Location $project
+        $output = pwsh -NoProfile -File $verify 2>&1
+        $code = $LASTEXITCODE
+        Pop-Location
+        return [PSCustomObject]@{ Code = $code; Output = "$output" }
+    }
+    $result = Invoke-Verify
+    Assert-Equal 0 $result.Code "verify-installation passes on an intact project"
+    Assert-True ($result.Output -match "SPECKIT_GATE=PASS") "verify-installation reports PASS"
+
+    $extensionsYml = Join-Path $project ".specify/extensions.yml"
+    $registered = Get-Content -LiteralPath $extensionsYml -Raw
+    $registered.Replace("optional: false", "optional: true") | Set-Content $extensionsYml
+    $result = Invoke-Verify
+    Assert-True ($result.Code -ne 0 -and $result.Output -match "optional") (
+        "verify-installation blocks optional strict hooks"
+    )
+    $registered | Set-Content $extensionsYml
+
+    $readiness = "$installed/scripts/powershell/quality/validate-readiness.ps1"
+    $original = Get-Content -LiteralPath $readiness -Raw
+    Add-Content -LiteralPath $readiness -Value "# local edit"
+    $result = Invoke-Verify
+    Assert-True ($result.Code -ne 0 -and $result.Output -match "was edited") (
+        "verify-installation blocks edited installed scripts"
+    )
+    [IO.File]::WriteAllText($readiness, $original)
+
     # Review Focus 4: updating with --force keeps the project's config.
     $configPath = "$installed/strict-config.yml"
     (Get-Content $configPath -Raw).Replace('"root": "frontend"', '"root": "web"') |

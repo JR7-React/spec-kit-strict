@@ -50,6 +50,7 @@
     "scripts/powershell/quality/validate-readiness.ps1": "e771f8584303cca149d0260ee2dd7c796f7800f0ba5e71d0342e966759793f1d",
     "scripts/powershell/quality/validate-taskstoissues.ps1": "66c138a89a7b028fa59eeb211215221e5fad89171e7c26d763b49a9dd126a5a3",
     "scripts/powershell/quality/validate-transition.ps1": "059f5110077d8cb624851f7cd48a17b1dc0cc6e61a9d83ec52e31257b6bd9e84",
+    "scripts/powershell/verify-installation.ps1": "b41c6b184d3ac457d02e5b38e83ac82eb20a13c7fccff79ba2bfb59d29afc210",
     "THIRD_PARTY_NOTICES.md": "bd129e6483d17c50518ac1ad23ecc52de0dca36a2c1761d8e4f29259e296034c"
   }
 }
