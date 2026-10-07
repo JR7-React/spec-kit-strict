@@ -1,5 +1,5 @@
 ---
-description: "Ejecuta los gates locales selectivos tras implementar"
+description: "Hook de Spec Kit: ejecuta los gates locales selectivos tras implementar"
 ---
 
 Run from the repository root:

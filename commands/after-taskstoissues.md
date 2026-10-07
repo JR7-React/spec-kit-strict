@@ -1,5 +1,5 @@
 ---
-description: "Verifica una issue unica por cada T###"
+description: "Hook de Spec Kit: verifica una issue unica por cada T###"
 ---
 
 Run from the repository root:

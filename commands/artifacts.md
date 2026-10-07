@@ -1,5 +1,5 @@
 ---
-description: "Valida spec, plan, tasks y checklists de la feature activa"
+description: "Hook de Spec Kit: valida spec, plan, tasks y checklists de la feature activa"
 ---
 
 Run from the repository root:

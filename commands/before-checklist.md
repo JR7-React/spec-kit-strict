@@ -1,5 +1,5 @@
 ---
-description: "Valida la specification antes del checklist"
+description: "Hook de Spec Kit: valida la specification antes del checklist"
 ---
 
 Run from the repository root:

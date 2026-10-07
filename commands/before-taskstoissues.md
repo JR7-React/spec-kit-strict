@@ -1,5 +1,5 @@
 ---
-description: "Exige analysis vigente y remoto GitHub valido"
+description: "Hook de Spec Kit: exige analysis vigente y remoto GitHub valido"
 ---
 
 Run from the repository root:

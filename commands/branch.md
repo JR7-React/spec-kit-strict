@@ -1,5 +1,5 @@
 ---
-description: "Crea o reutiliza la rama de la feature antes de especificar"
+description: "Hook de Spec Kit: crea o reutiliza la rama de la feature antes de especificar"
 ---
 
 Use the feature description from:

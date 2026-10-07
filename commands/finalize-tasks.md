@@ -1,5 +1,5 @@
 ---
-description: "Commitea tasks.md tras un receipt de implementacion vigente"
+description: "Hook de Spec Kit: commitea tasks.md tras un receipt de implementacion vigente"
 ---
 
 Run from the repository root:

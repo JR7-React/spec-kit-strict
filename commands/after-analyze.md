@@ -1,5 +1,5 @@
 ---
-description: "Registra el reporte de analyze y bloquea CRITICAL o HIGH"
+description: "Hook de Spec Kit: registra el reporte de analyze y bloquea CRITICAL o HIGH"
 ---
 
 Read `.specify/extensions/strict/prompts/record-analyze.md` completely and

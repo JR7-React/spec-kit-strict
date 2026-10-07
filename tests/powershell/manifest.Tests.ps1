@@ -7,16 +7,25 @@ Assert-True ($manifest -match '(?m)^  id: "strict"$') "extension id is strict"
 Assert-True ($manifest -match 'speckit_version: ">=1\.1\.0"') "requires Spec Kit 1.1+"
 
 $commands = [regex]::Matches(
-    $manifest, '(?m)^    - name: "(speckit\.[^"]+)"\r?\n      file: "([^"]+)"'
+    $manifest,
+    '(?m)^    - name: "(speckit\.[^"]+)"\r?\n      file: "([^"]+)"\r?\n      description: "([^"]+)"'
 )
 Assert-Equal 14 $commands.Count "manifest declares 14 commands"
+# Hook commands are dispatched by Spec Kit; the prefix keeps agents from
+# picking them for ordinary requests such as "commit this".
+$hookPrefix = "Hook de Spec Kit: "
 foreach ($command in $commands) {
     $name = $command.Groups[1].Value
     $file = $command.Groups[2].Value
+    $description = $command.Groups[3].Value
     Assert-True ($name -match '^speckit\.strict\.[a-z0-9-]+$') "$name uses the strict namespace"
+    Assert-True ($description.StartsWith($hookPrefix)) "$name description marks it as a hook"
     Assert-True (Test-Path -LiteralPath (Join-Path $root $file)) "$file exists"
     $body = Get-Content -LiteralPath (Join-Path $root $file) -Raw
     Assert-True ($body -match '(?s)^---\r?\ndescription: ".+"\r?\n---') "$file has a description"
+    Assert-True ($body.Contains("description: `"$description`"")) (
+        "$file description matches the manifest"
+    )
     Assert-True ($body -notmatch 'HOOK_ARGUMENTS') "$file uses native arguments"
     Assert-True ($body -notmatch '\.specify/scripts/powershell/(quality|git)/') (
         "$file points to the installed extension scripts"

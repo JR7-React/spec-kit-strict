@@ -1,5 +1,5 @@
 ---
-description: "Exige plan y artefactos tecnicos validos"
+description: "Hook de Spec Kit: exige plan y artefactos tecnicos validos"
 ---
 
 Run from the repository root:

@@ -1,5 +1,5 @@
 ---
-description: "Exige artefactos y checklists completos antes de analizar"
+description: "Hook de Spec Kit: exige artefactos y checklists completos antes de analizar"
 ---
 
 Run from the repository root:

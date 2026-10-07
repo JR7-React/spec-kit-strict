@@ -1,5 +1,5 @@
 ---
-description: "Valida rama y estructura minima de la specification"
+description: "Hook de Spec Kit: valida rama y estructura minima de la specification"
 ---
 
 Run from the repository root:

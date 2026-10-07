@@ -1,5 +1,5 @@
 ---
-description: "Exige artefactos, checklists y analysis receipt vigentes antes de implementar"
+description: "Hook de Spec Kit: exige artefactos, checklists y analysis receipt vigentes antes de implementar"
 ---
 
 Run from the repository root:

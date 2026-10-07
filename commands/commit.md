@@ -1,5 +1,5 @@
 ---
-description: "Commitea solo los artefactos SpecKit de la fase actual"
+description: "Hook de Spec Kit: commitea solo los artefactos SpecKit de la fase actual"
 ---
 
 Optional phase hint:

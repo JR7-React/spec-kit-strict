@@ -1,5 +1,5 @@
 ---
-description: "Exige specification y checklist base completos"
+description: "Hook de Spec Kit: exige specification y checklist base completos"
 ---
 
 Run from the repository root:
