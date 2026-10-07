@@ -38,7 +38,7 @@ repo, para instalarla en cualquier proyecto con un comando y mantener una sola f
 
 | Tema | Decisión |
 |---|---|
-| Distribución | Repo propio privado con tags; instalación con `--from <zip>` usando `GH_TOKEN` |
+| Distribución | Repo propio privado con tags; instalación con `--from <zip>`. Spec Kit 1.1 solo envía credenciales según `~/.specify/auth.json` (proveedor `github`, `token_env: GH_TOKEN`), y pide confirmar la URL (`y`) |
 | Alcance | Repo de la extensión v1.0.0 + adopción en la plantilla |
 | Nombres | id `strict`; comandos `speckit.strict.*`, sin alias |
 | Número de extensiones | Una sola (el orden de hooks solo se garantiza dentro de una extensión) |

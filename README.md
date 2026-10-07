@@ -22,7 +22,25 @@ del ciclo SDD en gates obligatorios.
 
 ## Instalación
 
-El repo es privado: Spec Kit usa `GH_TOKEN` o `GITHUB_TOKEN` para descargar el zip.
+El repo es privado. Spec Kit 1.1 solo envía credenciales a los hosts declarados en
+`~/.specify/auth.json`; créalo una vez por máquina (no guarda ningún secreto, lee el token de
+`GH_TOKEN`):
+
+```json
+{
+  "providers": [
+    {
+      "provider": "github",
+      "hosts": ["github.com", "api.github.com", "codeload.github.com"],
+      "auth": "bearer",
+      "token_env": "GH_TOKEN"
+    }
+  ]
+}
+```
+
+Al instalar desde una URL, Spec Kit pide confirmar que confías en la fuente (`y`). En un script
+se puede responder con `printf 'y\n' | specify extension add ...`.
 
 ```bash
 GH_TOKEN=$(gh auth token) specify extension add strict --from https://github.com/JR7-React/spec-kit-strict/archive/refs/tags/v1.0.0.zip
