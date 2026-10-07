@@ -1,5 +1,22 @@
 # Changelog
 
+## [1.1.0] - 2026-10-07
+
+### Added
+
+- `verify-installation.ps1`: gate de solo lectura para el CI del proyecto que verifica los 22
+  hooks (en orden, habilitados y obligatorios), el registro de la extensión, que los archivos
+  instalados no se hayan editado y que el CI corra los gates compartidos.
+- `install-checksums.json` en cada release y `tools/write-install-checksums.ps1` para
+  regenerarlo; la suite falla si queda desactualizado.
+- Job de CI no bloqueante contra el `specify-cli` más reciente.
+
+### Changed
+
+- Las descripciones de los 14 comandos empiezan con "Hook de Spec Kit:" para que los agentes no
+  los elijan ante pedidos comunes.
+- El test de instalación verifica que un gate instalado falle por la razón de negocio.
+
 ## [1.0.1] - 2026-10-07
 
 ### Fixed

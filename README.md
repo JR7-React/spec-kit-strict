@@ -19,6 +19,9 @@ del ciclo SDD en gates obligatorios.
 - Spec Kit `>= 1.1.0` (`uv tool install specify-cli`).
 - PowerShell 7+ (`pwsh`) y git.
 - Docker Compose, si el proyecto usa el gate de backend.
+- El proyecto debe tener los scripts PowerShell del core (`specify init --script ps`): la
+  extensión carga `.specify/scripts/powershell/common.ps1` de su propio proyecto y nunca
+  busca más arriba de la raíz.
 
 ## Instalación
 
@@ -43,14 +46,14 @@ Al instalar desde una URL, Spec Kit pide confirmar que confías en la fuente (`y
 se puede responder con `printf 'y\n' | specify extension add ...`.
 
 ```bash
-GH_TOKEN=$(gh auth token) specify extension add strict --from https://github.com/JR7-React/spec-kit-strict/archive/refs/tags/v1.0.1.zip
+GH_TOKEN=$(gh auth token) specify extension add strict --from https://github.com/JR7-React/spec-kit-strict/archive/refs/tags/v1.1.0.zip
 ```
 
 En PowerShell:
 
 ```powershell
 $env:GH_TOKEN = gh auth token
-specify extension add strict --from https://github.com/JR7-React/spec-kit-strict/archive/refs/tags/v1.0.1.zip
+specify extension add strict --from https://github.com/JR7-React/spec-kit-strict/archive/refs/tags/v1.1.0.zip
 ```
 
 Spec Kit registra los 22 hooks en `.specify/extensions.yml`, genera los skills
@@ -131,6 +134,42 @@ Un resultado `SPECKIT_GATE=BLOCKED` o un exit code distinto de cero detiene la f
 Los receipts de analyze e implementación viven en `.git/speckit/`: son locales, no se
 versionan y se rechazan cuando cambia el fingerprint de sus entradas.
 
+## Verificar la instalación
+
+`verify-installation.ps1` comprueba, sin modificar nada, que el proyecto sigue usando la
+extensión tal como se publicó:
+
+- los 22 hooks de `strict` están en `.specify/extensions.yml`, en orden, habilitados y
+  obligatorios;
+- `strict` está habilitada en `.specify/extensions/.registry` con la versión instalada;
+- ningún archivo instalado fue editado o borrado (contra `install-checksums.json`; los saltos
+  de línea CRLF no cuentan como edición);
+- el CI del proyecto corre los gates de cada raíz declarada en `strict-config.yml`.
+
+```bash
+pwsh -NoProfile -File .specify/extensions/strict/scripts/powershell/verify-installation.ps1
+```
+
+Responde `SPECKIT_GATE=PASS|BLOCKED` y sale con código distinto de cero si bloquea. Workflow
+recomendado para el proyecto (no necesita el CLI de Spec Kit):
+
+```yaml
+name: speckit-strict
+on:
+  pull_request:
+    paths: [".specify/**", ".claude/skills/speckit-*/**", ".github/workflows/**"]
+  push:
+    paths: [".specify/**", ".claude/skills/speckit-*/**", ".github/workflows/**"]
+jobs:
+  verify-installation:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+      - name: Verify strict installation
+        shell: pwsh
+        run: ./.specify/extensions/strict/scripts/powershell/verify-installation.ps1
+```
+
 ## Contrato de CI del proyecto
 
 Localmente solo corren pruebas focalizadas; las suites completas deben correr en el CI del
@@ -154,6 +193,13 @@ pwsh -NoProfile -File tests/powershell/run-tests.ps1 -Filter install
 `run-tests.ps1` crea proyectos Spec Kit desechables en la carpeta temporal: uno aporta el
 `common.ps1` core (vía `SPECKIT_CORE_DIR`) y el test `install` instala la extensión con
 `specify extension add <repo> --dev`.
+
+Después de cambiar cualquier archivo que se instala, regenera los checksums (la suite falla
+si quedan desactualizados):
+
+```bash
+pwsh -NoProfile -File tools/write-install-checksums.ps1
+```
 
 ## Créditos
 

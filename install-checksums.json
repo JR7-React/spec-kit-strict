@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "files": {
-    "CHANGELOG.md": "07b890e034dba2d434d43b6462ff458cf9c51a280aedcdd47ef0fc423978b7c8",
+    "CHANGELOG.md": "a57dd73947c447100c3eec07e37ac8aef14d0e3329a988d8e9c10fcf2dfbdbc6",
     "commands/after-analyze.md": "fcdab26cf1c1f23cfe0ecc78a867894b3715f79d5120e93aeae92c23c753045c",
     "commands/after-taskstoissues.md": "5be76ee4d622f51477eeda3a3d67a85a0d135e44dd1fe1f5cc6f0ef05badf1e7",
     "commands/artifacts.md": "428970fd16097c65e2638337061969f66165125da6dcb3a840bf0854a14640e9",
@@ -17,10 +17,10 @@
     "commands/implementation-gate.md": "5a013625ed8336a3dda496042ede892e227117f39fe596160e76af349e671b3f",
     "commands/readiness.md": "051df96370b32e6f736c9e8bbe314fb0f84a1018afd4fbf0ea6f1f360971013c",
     "config-template.yml": "d8449a43a00b6fd7c54e3f1bd9501c42659f8505f0d48a15f9358b04d76ffad8",
-    "extension.yml": "9e5c0fb7b6063b0829a7b26794ffadbffe2970b9c7e18467b6cd1dd9bfc140f6",
+    "extension.yml": "ade0d64496978427fd620c13abcbb99cbf89cb1803c3a92dc11242c84f4d1152",
     "LICENSE": "56704884de73cb9fd1fea6ea833441deff0d03fc33967fa96946175edff3c76a",
     "prompts/record-analyze.md": "69e1c8c59a57eb99312bf53f0820621207fde96a98bd14e69ccd81863258e6b1",
-    "README.md": "f3665549b1d6f0f70cb4eda3faf3d7e52eb1ad9d9fc426ba49ccede76c45e7d9",
+    "README.md": "aa376f1b9b63b8fa4368b3e1d4d8392bf77caff147e23eeded04ba202ba1b5b1",
     "scripts/powershell/git/commit-spec-artifacts.ps1": "c22ce95a8052aafcb1e1b29d346d41055e7a3568f8ae5e8856ea6f1c03e07917",
     "scripts/powershell/git/create-new-feature-branch.ps1": "7fea0ce64efd95cc3c84103ca2573f55a957e28d2d91afe7a60f8e35f27c3e6e",
     "scripts/powershell/git/finalize-tasks.ps1": "bc8e7ef24b43739f09336ca6093c50e6a21952432867f4283b927efeed040bfb",
