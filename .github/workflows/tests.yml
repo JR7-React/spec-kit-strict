@@ -1,0 +1,33 @@
+name: tests
+
+on:
+  push:
+    branches: [main]
+    tags: ["v*"]
+  pull_request:
+
+concurrency:
+  group: tests-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  powershell-tests:
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v6
+      - uses: astral-sh/setup-uv@v6
+      - name: Install Spec Kit CLI
+        run: uv tool install specify-cli==1.1.1
+      - name: Configure git identity
+        run: |
+          git config --global user.name "strict-ci"
+          git config --global user.email "strict-ci@example.org"
+          git config --global init.defaultBranch main
+      - name: Run extension tests
+        shell: pwsh
+        run: ./tests/powershell/run-tests.ps1
