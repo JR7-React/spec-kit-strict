@@ -29,6 +29,7 @@
     "scripts/powershell/import-speckit-core.ps1": "a74d77519f8d002ef65679f392cfed0f5ddf901bb68d22a8cfea1fd5b5dd5b2d",
     "scripts/powershell/installation/hook-registration.ps1": "a0316fb6dabd4cdf7be2599f0bd75b8db846076496e0cc179c906fe7cb6ab293",
     "scripts/powershell/installation/install-checksums.ps1": "664fa92a83c233ac68f670116f4d90121ff3cec33281414e414a5da91a0e95b2",
+    "scripts/powershell/installation/project-contract.ps1": "668873969c278f1780e0156dae72cdebcb1fefe0bd8a605ec5c6f2fcce0fc52e",
     "scripts/powershell/quality/analyze-receipt.ps1": "c5fdb0c08b3a0535a0918b6ecd3b98910df8eb665f565ef916c0493a1a9e1ca6",
     "scripts/powershell/quality/artifact-rules.ps1": "36c588f77b801ace63a9a1a4974707a8e7eaa8f878df9c36ed23b92adb32ae03",
     "scripts/powershell/quality/change-scope.ps1": "8262718b7c7a67f3be3c8778164ecac6d974d62cf76ea437ad178237494ebed6",
