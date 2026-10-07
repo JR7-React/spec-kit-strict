@@ -2,6 +2,7 @@
 .superpowers/
 tests/
 docs/
+tools/
 .github/
 .gitattributes
 .gitignore
